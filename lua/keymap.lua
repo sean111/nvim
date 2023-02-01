@@ -23,20 +23,13 @@ if wk_status_ok then
             k = { vim.diagnostic.goto_prev, "Prev Diagnostic", },
             q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
             w = { "<cmd>Telescope diagnostics theme=get_ivy<cr>", "Workspace Diagnostics" },
+            R = { "<cmd>LspRestart<cr>", "Restart LSP" },
         },
-        ["<leader>p"] = {
-            name = "+Packer",
-            c = { "<cmd>PackerCompile<cr>", "Compile" },
-            i = { "<cmd>PackerInstall<cr>", "Install" },
-            s = { function()
-                local notify_ok, notify = pcall(require, "notify")
-                if notify_ok then
-                    notify("Running PackerSync...", "info")
-                end
-                vim.cmd("PackerSync")
-            end, "Sync" },
-            S = { "<cmd>PackerStatus<cr>", "Status" },
-            u = { "<cmd>PackerUpdate<cr>", "Update" },
+        ["<leader>L"] = {
+            name = "+Lazy (Plugin Manager)",
+            l = { "<cmd>Lazy show<cr>", "Show Interface" },
+            s = { "<cmd>Lazy sync<cr>", "Sync Plugins" },
+            p = { "<cmd>Lazy profile<cr>", "Startup Profile" },
         },
         ["<leader>b"] = {
             name = "+Buffer/Splits",
