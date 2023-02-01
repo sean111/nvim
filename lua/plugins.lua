@@ -102,99 +102,121 @@ require("lazy").setup({
                 config = function()
                     require('telescope').load_extension("zoxide")
                 end,
-           },
+            },
         },
         config = function()
             require("config.telescope")
         end,
     },
-    
-  {
-    "lewis6991/gitsigns.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("config.gitsigns")
-    end,
-    event = "BufReadPre",
-  },
 
-  {
-    "sindrets/diffview.nvim",
-    cmd = "DiffviewOpen",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
+    {
+        "lewis6991/gitsigns.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("config.gitsigns")
+        end,
+        event = "BufReadPre",
     },
-  },
 
-  {
-    "TimUntersberger/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
+    {
+        "sindrets/diffview.nvim",
+        cmd = "DiffviewOpen",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
     },
-    config = function()
-      require("config.neogit")
-    end,
-  },
 
-  {
-    'pwntester/octo.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'almo7aya/openingh.nvim',
+    {
+        "TimUntersberger/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+        },
+        config = function()
+            require("config.neogit")
+        end,
     },
-    cmd = "Octo",
-    config = function()
-      require("config.github")
-    end
-  },
 
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    event = "BufRead",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" },
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-      { "lukas-reineke/lsp-format.nvim" },
-      { "nvim-lua/lsp-status.nvim" },
-      { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim", name = "lsp_lines", },
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
-      { "hrsh7th/cmp-emoji" },
-      { "f3fora/cmp-spell" },
-      { "barreiroleo/ltex-extra.nvim" },
-
-      -- Snippets
-      { "L3MON4D3/LuaSnip" },
-      { "rafamadriz/friendly-snippets" },
-
-      -- Other mason stuff
-      { "jose-elias-alvarez/null-ls.nvim" },
-      { "jayp0521/mason-null-ls.nvim" },
-
-      -- DAP
-      { "mfussenegger/nvim-dap" },
-      { "jayp0521/mason-nvim-dap.nvim" },
+    {
+        'pwntester/octo.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'kyazdani42/nvim-web-devicons',
+            'almo7aya/openingh.nvim',
+        },
+        cmd = "Octo",
+        config = function()
+            require("config.github")
+        end
     },
-    config = function()
-      require("config.lsp-zero")
-    end,
-  },
 
-  {
-      "vigoux/notifier.nvim",
-      config = function()
-          require("config.notifier")
-      end
-  }
+    {
+        'VonHeikemen/lsp-zero.nvim',
+        event = "BufRead",
+        dependencies = {
+            -- LSP Support
+            { "neovim/nvim-lspconfig" },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "lukas-reineke/lsp-format.nvim" },
+            { "nvim-lua/lsp-status.nvim" },
+            { url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim", name = "lsp_lines", },
+
+            -- Autocompletion
+            { "hrsh7th/nvim-cmp" },
+            { "hrsh7th/cmp-buffer" },
+            { "hrsh7th/cmp-path" },
+            { "saadparwaiz1/cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-nvim-lua" },
+            { "hrsh7th/cmp-emoji" },
+            { "f3fora/cmp-spell" },
+            { "barreiroleo/ltex-extra.nvim" },
+
+            -- Snippets
+            { "L3MON4D3/LuaSnip" },
+            { "rafamadriz/friendly-snippets" },
+
+            -- Other mason stuff
+            { "jose-elias-alvarez/null-ls.nvim" },
+            { "jayp0521/mason-null-ls.nvim" },
+
+            -- DAP
+            { "mfussenegger/nvim-dap" },
+            { "jayp0521/mason-nvim-dap.nvim" },
+        },
+        config = function()
+            require("config.lsp-zero")
+        end,
+    },
+
+    {
+        "vigoux/notifier.nvim",
+        config = function()
+            require("config.notifier")
+        end
+    },
+
+    {
+        "terrortylor/nvim-comment",
+        config = function()
+            require("nvim_comment").setup({
+                marker_padding = true,
+                -- should comment out empty or whitespace only lines
+                comment_empty = true,
+                -- trim empty comment whitespace
+                comment_empty_trim_whitespace = true,
+                -- Should key mappings be created
+                create_mappings = true,
+                -- Normal mode mapping left hand side
+                line_mapping = "gcc",
+                -- Visual/Operator mapping left hand side
+                operator_mapping = "gc",
+                -- text object mapping, comment chunk,,
+                comment_chunk_text_object = "ic",
+            })
+        end
+    },
+
 })
