@@ -219,4 +219,63 @@ require("lazy").setup({
         end
     },
 
+    {
+        "akinsho/toggleterm.nvim", config = function()
+            require("config.toggleterm")
+        end
+    },
+
+    {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require("config.lualine")
+        end
+    },
+
+    {
+        "nvim-neorg/neorg",
+        config = function()
+            require("config.neorg")
+        end,
+        requires = "nvim-lua/plenary.nvim"
+    },
+
+    {
+        "vigoux/notifier.nvim",
+        config = function()
+            require("config.notifier")
+        end
+    },
+
+    {
+        "nvim-orgmode/orgmode",
+        config = function()
+            require("config.orgmode")
+        end,
+        dependencies = {
+
+            "lukas-reineke/headlines.nvim",
+        },
+    },
+
+    {
+        "ojroques/nvim-bufdel",
+        config = function()
+            require("bufdel").setup({
+                quit = false,
+            })
+        end
+    },
+
+    {
+        'gpanders/editorconfig.nvim'
+    },
+    {
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup()
+        end
+    },
+
 })
