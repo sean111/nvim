@@ -14,6 +14,9 @@ end
 local wk_status_ok, wk = pcall(require, "which-key")
 if not wk_status_ok then return end
 
+local parsers_ok, parsers = pcall(require, 'nvim-treesitter.parsers')
+if not parsers_ok then return end
+
 local languages = {
     "bash",
     "comment",
@@ -81,3 +84,14 @@ configs.setup({
 if orgmode_ok then
     orgmode.setup()
 end
+
+local parser_config = parsers.get_parser_configs()
+
+parser_config.tape = {
+    install_info = {
+        url = "https://github.com/charmbracelet/tree-sitter-vhs",
+        branch = "main",
+        files = { "src/parser.c" }
+    },
+    filetype = "tape",
+}

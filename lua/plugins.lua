@@ -278,4 +278,6 @@ require("lazy").setup({
         end
     },
 
+    { "darfink/vim-plist" },
+
 })
