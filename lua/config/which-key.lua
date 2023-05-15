@@ -1,7 +1,10 @@
 local keymap = vim.keymap.set
 
 local status_ok, whichkey = pcall(require, "which-key")
-if not status_ok then print("which-key not loaded") return end
+if not status_ok then
+    print("which-key not loaded")
+    return
+end
 
 vim.g.maplocalleader = " "
 vim.g.mapleader = " "
@@ -21,30 +24,30 @@ whichkey.setup({
     show_help = false,
     ignore_missing = false,
     plugins = {
-      marks = true,
-      registers = true,
-      presets = {
-        operators = true,
-        motions = true,
-        text_objects = true,
-        windows = falsewhich,
-        nav = true,
-        z = true,
-        g = true,
-      },
+        marks = true,
+        registers = true,
+        presets = {
+            operators = true,
+            motions = true,
+            text_objects = true,
+            windows = falsewhich,
+            nav = true,
+            z = true,
+            g = true,
+        },
     },
     window = {
-      border = "single",
-      position = "bottom",
-      margin = { 0, 0, 0, 0, },
-      padding = { 0, 1, 0, 1, },
-      winblend = 0,
+        border = "single",
+        position = "bottom",
+        margin = { 0, 0, 0, 0, },
+        padding = { 0, 1, 0, 1, },
+        winblend = 0,
     },
     layout = {
-      height = { min = 4, max = 25 },
-      width = { min = 1, max = 50 },
-      spacing = 10,
-      align = "center",
+        height = { min = 4, max = 25 },
+        width = { min = 1, max = 50 },
+        spacing = 10,
+        align = "center",
     },
 })
 
@@ -52,7 +55,7 @@ whichkey.register({
     ["<leader><leader>"] = { "<cmd>Telescope find_files<CR>", "Find Files" },
     ["<leader>,"] = { "<cmd>Telescope buffers<CR>", "Find Buffers" },
     ["<leader>/"] = { "<cmd>Telescope live_grep_args<CR>", "File Search" },
-    ["<leader>."] = { "<cmd>Telescope find_files<CR>", "Find Files" },
+    ["<leader>."] = { "<cmd>Telescope find_files hidden=true<CR>", "Find Files (All)" },
     ["<leader>l"] = {
         name = "+LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Actions" },
@@ -129,4 +132,3 @@ whichkey.register({
         B = { "<cmd>TSTextobjectGotoNextEnd @block.inner<cr>", "Next Block End" },
     },
 })
-
