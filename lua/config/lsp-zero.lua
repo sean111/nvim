@@ -26,6 +26,9 @@ if not lsp_format_status_ok then return end
 local luasnip_status_ok, luasnip = pcall(require, "luasnip")
 if not luasnip_status_ok then return end
 
+local copilot_status_ok, copilit = pcall(require, "copilot_cmp")
+if not copilot_status_ok then return end
+
 local kind_icon = {
     Text = "",
     Method = "",
@@ -51,7 +54,8 @@ local kind_icon = {
     Struct = "",
     Event = "",
     Operator = "",
-    TypeParameter = ""
+    TypeParameter = "",
+    Copilot = "",
 }
 
 lsp.preset("recommended")
@@ -99,8 +103,9 @@ end, { "i", "s" })
 
 local cmp_sources = lsp.defaults.cmp_sources()
 
-table.insert(cmp_sources, 1, { name = 'emoji' })
-table.insert(cmp_sources, 1, { name = 'orgmode' })
+table.insert(cmp_sources, 1, { name = 'copilot' })
+table.insert(cmp_sources, { name = 'emoji' })
+table.insert(cmp_sources, { name = 'orgmode' })
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
@@ -110,7 +115,6 @@ lsp.setup_nvim_cmp({
     },
     formatting = {
         fields = { "menu", "abbr", "kind" },
-
         format = function(entry, item)
             -- item.kind = kind_icon[item.kind]
             item.kind = string.format("%s %s", kind_icon[item.kind], item.kind)
@@ -120,6 +124,8 @@ lsp.setup_nvim_cmp({
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[Lua]",
                 path = "[Path]",
+                emoji = "[Emoji]",
+                copilot = "[Copilot]"
             })[entry.source.name]
 
             return item
@@ -151,5 +157,6 @@ null_ls.setup({
         -- null_ls.builtins.formatting.markdownlint,
         null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.rustfmt,
+        null_ls.builtins.formatting.shfmt,
     },
 })
